@@ -54,7 +54,17 @@ User → Domain-Joined Device → Active Directory → Entra Connect → Entra I
 - Hybrid environments introduce dependencies that impact SSO and login behavior
 
 ## Screenshots
+### Entra ID Users
+![Entra Users](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/users.png)
 
+### Sign-in Logs
+![Sign-in Logs](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/sign-ins.png)
+
+### Sync Status
+![Sync Status](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/sync%20status.png)
+
+### Domain Joined Laptop
+![Domain Joined Laptop](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/domain-joined-laptop.png)
 
 ## Future Improvements
 - Configure Azure RBAC for resource access control
