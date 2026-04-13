@@ -54,7 +54,7 @@ User → Domain-Joined Device → Active Directory → Entra Connect → Entra I
 - Hybrid environments introduce dependencies that impact SSO and login behavior
 
 ## Screenshots
-domain-joined-laptop.png
+
 
 ## Future Improvements
 - Configure Azure RBAC for resource access control
