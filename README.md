@@ -54,13 +54,7 @@ User → Domain-Joined Device → Active Directory → Entra Connect → Entra I
 - Hybrid environments introduce dependencies that impact SSO and login behavior
 
 ## Screenshots
-*(Add screenshots here)*
 
-Suggested screenshots:
-- Entra Connect sync status
-- Entra ID user list
-- Sign-in logs
-- Domain join confirmation
 
 ## Future Improvements
 - Configure Azure RBAC for resource access control
