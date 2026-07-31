@@ -1,5 +1,6 @@
 # azure-hybrid-identity-lab
 Home Lab for understanding and testing Azure Hybrid Identity
+Extended lab to solidify infrastructure concepts
 
 ## Technologies Used
 - On-Premises Active Directory (Windows Server)
@@ -7,6 +8,8 @@ Home Lab for understanding and testing Azure Hybrid Identity
 - Entra Connect (Azure AD Connect)
 - Windows 11 (Domain-Joined Laptop)
 - VMWare Workstation (Domain-Joined Windows 11 VM)
+- pfSense (firewall)
+- Veeam (backups)
 
 ## Authentication Flow
 User → Domain-Joined Device → Active Directory → Entra Connect → Entra ID → Cloud Applications
@@ -46,6 +49,9 @@ User → Domain-Joined Device → Active Directory → Entra Connect → Entra I
   - Confirmed MFA prompts during cloud sign-in
   - Verified sign-in logs in Entra ID
   - Tested authentication scenarios with domain controller offline
+ 
+- Installed a Veeam server to manage backups
+- Installed a pfSense server for network control
 
 ## Key Findings
 - Users can authenticate to cloud services when the domain controller is offline when using Password Hash Sync
