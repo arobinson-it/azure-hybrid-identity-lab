@@ -229,7 +229,6 @@ Examples include:
 Planned additions and improvements include:
 
 * Microsoft Intune / endpoint management
-* MECM / Configuration Manager
 * Azure administration and resource management
 * PowerShell automation
 * Ansible
