@@ -1,86 +1,257 @@
-# azure-hybrid-identity-lab
-Home Lab for understanding and testing Azure Hybrid Identity
-Extended lab to solidify infrastructure concepts
+# Homelab Infrastructure Lab
 
-## Technologies Used
-- On-Premises Active Directory (Windows Server)
-- Microsoft Entra ID (Azure AD)
-- Entra Connect (Azure AD Connect)
-- Windows 11 (Domain-Joined Laptop)
-- VMWare Workstation (Domain-Joined Windows 11 VM)
-- pfSense (firewall)
-- Veeam (backups)
+A virtualized home lab built to develop and demonstrate practical skills across **Windows infrastructure, identity, networking, backup, Linux administration, and cloud integration**.
 
-## Authentication Flow
-User → Domain-Joined Device → Active Directory → Entra Connect → Entra ID → Cloud Applications
+The lab started as a Microsoft Entra hybrid identity project and has evolved into a broader infrastructure environment for testing enterprise technologies, troubleshooting real-world infrastructure scenarios, and building hands-on administration experience.
 
-## Implementation
+## Technologies
 
-# 1. Active Directory Setup
-- Configured a domain controller on Windows Server 2025
-- Created users and organizational units (OUs)
-- Established domain environment for authentication
+### Virtualization
 
-# 2. Entra ID Integration
-- Configured Microsoft Entra ID tenant
-- Installed and configured Entra Connect on the DC
-- Enabled Password Hash Synchronization (PHS)
+* VMware Workstation Pro
+* Multiple Windows Server and Linux virtual machines
+* Isolated virtual networks for infrastructure and client systems
 
-# 3. Directory Synchronization
-- Synced on-prem AD users to Entra ID
-- Verified synchronization status
-- Confirmed user visibility in Entra portal
+### Identity & Windows Infrastructure
 
-# 4. Client Configuration
-- Joined Windows client to domain
-- Validated login using domain credentials
-- Tested access to cloud services (office.com)
+* Windows Server 2025
+* Active Directory Domain Services (AD DS)
+* Active Directory DNS
+* Organizational Units and user management
+* Domain-joined Windows clients
+* Microsoft Entra ID
+* Microsoft Entra Connect
+* Password Hash Synchronization (PHS)
 
-# 5. Authentication & Testing
-- Enforced Multi-Factor Authentication (MFA) across all user accounts
-  - Standard users configured with traditional MFA methods
-  - Administrative accounts secured using passwordless MFA for enhanced protection
+### Networking & Security
 
-- Disabled legacy authentication protocols
-  - Blocked Exchange ActiveSync and other legacy clients
-  - Reduced exposure to credential-based attacks (e.g., password spray)
+* pfSense
+* Firewall and NAT
+* DHCP
+* DNS
+* Network segmentation
+* Isolated VMware virtual networks
+* Internet access policies and internal network aliases
 
-- Validated authentication behavior:
-  - Confirmed MFA prompts during cloud sign-in
-  - Verified sign-in logs in Entra ID
-  - Tested authentication scenarios with domain controller offline
- 
-- Installed a Veeam server to manage backups
-- Installed a pfSense server for network control
+### Backup & Recovery
 
-## Key Findings
-- Users can authenticate to cloud services when the domain controller is offline when using Password Hash Sync
-- On-prem authentication depends on domain controller availability
-- Entra ID maintains independent authentication once identities are synchronized
-- Hybrid environments introduce dependencies that impact SSO and login behavior
+* Veeam Backup & Replication
+* Dedicated Veeam server
+* Backup testing and recovery scenarios
 
-## Screenshots
-### Entra ID Users
-![Entra Users](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/users.png)
+### Linux
 
-### Sign-in Logs
-![Sign-in Logs](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/sign-ins.png)
+* Ubuntu Server
+* Linux networking and Netplan
+* DNS troubleshooting
+* Linux server administration
 
-### Sync Status
-![Sync Status](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/sync%20status.png)
+## Current Lab Architecture
 
-### Domain Joined Laptop
-![Domain Joined Laptop](https://github.com/arobinson-it/azure-hybrid-identity-lab/blob/90de90a8f4169b8db488be5d0f4dfc79c610fc9b/domain-joined-laptop.png)
+The environment currently consists of several virtualized infrastructure systems connected through VMware virtual networks.
 
-## Future Improvements
-- Configure Azure RBAC for resource access control
-- Deploy Azure Policy for governance and compliance
-- Integrate Microsoft Intune for device management
+```text
+                         Internet
+                            │
+                            ▼
+                       ┌─────────┐
+                       │ pfSense │
+                       │ Firewall│
+                       └────┬────┘
+                            │
+              ┌─────────────┴─────────────┐
+              │                           │
+        Infrastructure                Server Network
+           Network                        │
+              │                           │
+          ┌───┴───┐                  ┌────┴─────┐
+          │ DC01  │                  │  Ubuntu  │
+          │ AD/DNS│                  │  Server  │
+          └───┬───┘                  └──────────┘
+              │
+        ┌─────┴─────┐
+        │           │
+     Windows      Other
+     Clients       VMs
+              
+              ┌────────────┐
+              │   Veeam    │
+              │   Server   │
+              └────────────┘
+```
+
+## Active Directory
+
+* Deployed Windows Server 2025 as the domain controller
+* Configured Active Directory Domain Services
+* Configured internal DNS
+* Created users and organizational units
+* Configured domain authentication
+* Joined Windows clients to the domain
+* Configured DHCP authorization and domain administration
+
+## Microsoft Entra Hybrid Identity
+
+The lab integrates on-premises Active Directory with Microsoft Entra ID.
+
+* Created Microsoft Entra ID tenant
+* Installed and configured Microsoft Entra Connect
+* Enabled Password Hash Synchronization
+* Synchronize on-premises identities to Entra ID
+* Verified synchronization and account visibility
+* Tested cloud authentication independently of on-premises availability
+
+### Authentication Flow
+
+```text
+On-Prem AD
+    │
+    │ Microsoft Entra Connect
+    ▼
+Microsoft Entra ID
+    │
+    ▼
+Cloud Applications
+```
+
+The lab demonstrates the distinction between **on-premises authentication** and **cloud authentication**, including the behavior of synchronized identities when the domain controller is unavailable.
+
+## Microsoft Entra Security
+
+Identity security has also been incorporated into the lab environment.
+
+* Multi-Factor Authentication
+* Separate standard and administrative identities
+* Passwordless authentication for privileged accounts
+* Conditional Access policies
+* Legacy authentication blocking
+* Sign-in log investigation
+* Authentication testing during infrastructure outages
+
+## pfSense Networking
+
+pfSense provides the primary routing and firewall layer for the lab.
+
+Current interfaces include:
+
+* WAN
+* LAN
+* OPT1
+
+VMware virtual networks are used to isolate different portions of the environment.
+
+The firewall configuration is being used to practice:
+
+* Inter-network routing
+* DHCP
+* NAT
+* DNS
+* Firewall rules
+* Network aliases
+* Internet access control
+* Segmentation between infrastructure and client/server networks
+
+## VMware Networking
+
+The lab uses VMware Workstation Pro virtual networks to create isolated network segments.
+
+Current virtual networking includes:
+
+* VMnet1 — Host-only
+* VMnet2 — Infrastructure network
+* VMnet3 — Additional isolated network
+* VMnet8 — NAT / Internet connectivity
+
+This provides a controlled environment for testing routing, firewall policies, DHCP, DNS, and connectivity between isolated systems.
+
+## Veeam
+
+A dedicated Veeam server is used to develop practical backup and recovery skills.
+
+Current objectives include:
+
+* Virtual machine backups
+* Backup configuration
+* Backup verification
+* Recovery testing
+* Understanding backup infrastructure dependencies
+
+## Ubuntu Server
+
+Ubuntu Server is included as a Linux component of the lab.
+
+Current work includes:
+
+* Server deployment
+* Static/DHCP networking
+* Netplan configuration
+* DNS troubleshooting
+* Connectivity troubleshooting
+* Integration with the lab's segmented network architecture
+
+## Skills Being Practiced
+
+This lab is primarily used to build practical administration and troubleshooting experience in:
+
+* Active Directory administration
+* Microsoft Entra ID
+* Hybrid identity
+* Windows Server administration
+* Linux administration
+* DNS
+* DHCP
+* TCP/IP networking
+* Firewall administration
+* Network segmentation
+* Virtualization
+* Backup and recovery
+* PowerShell
+* Infrastructure troubleshooting
+* Authentication and access control
+
+## What This Lab Demonstrates
+
+Rather than being a collection of disconnected VMs, the goal is to maintain an interconnected environment where changes to one component can have realistic effects on the others.
+
+Examples include:
+
+* Testing authentication when AD infrastructure is unavailable
+* Troubleshooting DNS across multiple network segments
+* Controlling server Internet access through pfSense
+* Testing DHCP and routing between isolated networks
+* Backing up and recovering infrastructure VMs
+* Troubleshooting Windows and Linux connectivity
+* Testing identity and authentication policies in Entra ID
+* Investigating how infrastructure dependencies affect availability
+
+## Future Development
+
+Planned additions and improvements include:
+
+* Microsoft Intune / endpoint management
+* MECM / Configuration Manager
+* Azure administration and resource management
+* PowerShell automation
+* Ansible
+* Terraform
+* Kubernetes
+* Expanded network segmentation
+* Additional monitoring and logging
+* More comprehensive backup and disaster-recovery testing
 
 ## Lessons Learned
-- Understanding authentication flow is critical in hybrid environments
-- Cloud identity can remain operational even when on-prem infrastructure fails
-- Proper configuration of sync and identity methods impacts availability and security
+
+Building the environment has provided practical experience with the dependencies that exist between infrastructure services.
+
+In particular:
+
+* DNS is foundational to both Windows and network infrastructure.
+* Hybrid identity requires understanding both on-premises and cloud authentication.
+* Network segmentation introduces additional routing and firewall dependencies.
+* Backup infrastructure is itself dependent on the underlying network and virtualization environment.
+* Troubleshooting is often about identifying which layer is actually failing rather than assuming the visible symptom is the root cause.
 
 ## Author
 Adam Robinson
+
+**Adam Robinson**
