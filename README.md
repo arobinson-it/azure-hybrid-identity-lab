@@ -246,6 +246,5 @@ In particular:
 * Troubleshooting is often about identifying which layer is actually failing rather than assuming the visible symptom is the root cause.
 
 ## Author
-Adam Robinson
 
 **Adam Robinson**
