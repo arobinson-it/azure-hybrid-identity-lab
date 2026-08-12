@@ -71,13 +71,8 @@ The environment currently consists of several virtualized infrastructure systems
               │
         ┌─────┴─────┐
         │           │
-     Windows      Other
-     Clients       VMs
-              
-              ┌────────────┐
-              │   Veeam    │
-              │   Server   │
-              └────────────┘
+     Windows      Veeam Server
+     Clients
 ```
 
 ## Active Directory
