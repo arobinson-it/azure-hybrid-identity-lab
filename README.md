@@ -316,5 +316,3 @@ In particular:
 ## Author
 
 **Adam Robinson**
-
-**Adam Robinson**
