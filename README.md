@@ -1,4 +1,4 @@
-# Homelab Infrastructure Lab
+# Infrastructure HomeLab
 
 A virtualized home lab built to develop and demonstrate practical skills across **Windows infrastructure, identity, networking, backup, Linux administration, and cloud integration**.
 
