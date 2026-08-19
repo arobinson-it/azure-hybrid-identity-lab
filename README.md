@@ -61,7 +61,8 @@ The network architecture is intentionally segmented to provide practical experie
 - Infrastructure dependencies
 - Windows and Linux connectivity troubleshooting
 
-## Windows Infrastructure & Active Directory
+<details>
+<summary><strong>Windows Infrastructure & Active Directory</strong></summary>
 
 The Windows infrastructure provides the foundation for the lab's identity and domain services.
 
@@ -79,7 +80,10 @@ The Windows infrastructure provides the foundation for the lab's identity and do
 
 The environment is designed to reproduce common enterprise dependencies between **Active Directory, DNS, DHCP, networking, and client authentication**.
 
-## Microsoft Entra Hybrid Identity
+</details>
+
+<details>
+<summary><strong>Microsoft Entra Hybrid Identity</strong></summary>
 
 The lab integrates on-premises Active Directory with Microsoft Entra ID using Microsoft Entra Connect.
 
@@ -99,7 +103,7 @@ The lab integrates on-premises Active Directory with Microsoft Entra ID using Mi
                 |
                 v
        Microsoft Entra Connect
-                | 
+                |
                 v
          Microsoft Entra ID
                 |
@@ -108,7 +112,10 @@ The lab integrates on-premises Active Directory with Microsoft Entra ID using Mi
 
 The environment is used to explore the distinction between **on-premises identity infrastructure and cloud authentication**, including how synchronized identities behave when on-premises infrastructure is unavailable.
 
-## Microsoft Entra Security
+</details>
+
+<details>
+<summary><strong>Microsoft Entra Security</strong></summary>
 
 Identity security has been incorporated into the environment to provide practical experience with modern authentication and access-control concepts.
 
@@ -122,7 +129,10 @@ Identity security has been incorporated into the environment to provide practica
 
 These configurations provide hands-on experience with both **identity administration and identity security** rather than treating Entra ID purely as a synchronization target.
 
-## Networking & pfSense
+</details>
+
+<details>
+<summary><strong>Networking & pfSense</strong></summary>
 
 pfSense provides the primary routing and firewall layer for the lab.
 
@@ -158,7 +168,10 @@ Current networks include:
 
 This provides a controlled environment for testing connectivity and the interaction between **virtual networking, routing, firewall policy, DNS, and DHCP**.
 
-## Backup & Recovery
+</details>
+
+<details>
+<summary><strong>Backup & Recovery</strong></summary>
 
 A dedicated Veeam server is used to develop practical backup and recovery experience.
 
@@ -175,7 +188,10 @@ Current work includes:
 
 The goal is to treat backup as part of the infrastructure rather than simply configuring a backup job and assuming recovery will work.
 
-## Linux Administration
+</details>
+
+<details>
+<summary><strong>Linux Administration</strong></summary>
 
 Ubuntu Server provides a Linux component within the otherwise Microsoft-focused infrastructure environment.
 
@@ -189,7 +205,10 @@ Current work includes:
 - Linux server administration
 - Integration with segmented lab networks
 
-## Automation & CI/CD
+</details>
+
+<details>
+<summary><strong>Automation & CI/CD</strong></summary>
 
 Automation is being incorporated into the lab using PowerShell and Azure DevOps.
 
@@ -207,7 +226,10 @@ Current work includes:
 
 The goal is to move beyond manually administering the environment and begin applying **source control, automation, and repeatable deployment practices**.
 
-## Skills Being Practiced
+</details>
+
+<details>
+<summary><strong>Skills Being Practiced</strong></summary>
 
 The lab is used to build practical administration, automation, and troubleshooting experience across:
 
@@ -229,7 +251,10 @@ The lab is used to build practical administration, automation, and troubleshooti
 - Authentication and access control
 - Infrastructure troubleshooting
 
-## Real-World Scenarios
+</details>
+
+<details>
+<summary><strong>Real-World Scenarios</strong></summary>
 
 The lab is intentionally built to support realistic troubleshooting scenarios rather than simply demonstrating successful configurations.
 
@@ -257,7 +282,10 @@ The lab is intentionally built to support realistic troubleshooting scenarios ra
 
 The underlying goal is to practice **finding the actual failing layer rather than troubleshooting only the visible symptom**.
 
-## Future Development
+</details>
+
+<details>
+<summary><strong>Future Development</strong></summary>
 
 Planned additions and improvements include:
 
@@ -271,7 +299,10 @@ Planned additions and improvements include:
 - Monitoring and centralized logging
 - More comprehensive backup and disaster-recovery testing
 
-## Lessons Learned
+</details>
+
+<details>
+<summary><strong>Lessons Learned</strong></summary>
 
 Building and maintaining the environment has provided practical experience with the dependencies that exist between infrastructure services.
 
@@ -284,6 +315,6 @@ Some of the most important lessons so far:
 - **Infrastructure problems are often dependency problems.**
 - **Effective troubleshooting starts by identifying which layer is actually failing rather than assuming the visible symptom is the root cause.**
 
-## Author
+</details>
 
-**Adam Robinson**
+## Author
