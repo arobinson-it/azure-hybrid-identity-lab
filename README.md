@@ -25,29 +25,31 @@ Rather than operating as a collection of isolated virtual machines, the lab is d
 The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
     Internet
-        │
-        ▼
-    ┌─────────────┐
-    │   pfSense   │
-    │ Firewall /  │
-    │    Router   │
-    └──────┬──────┘
-           │
-     ┌─────┴──────────────┐
-     │                    │
-     ▼                    ▼
-Infrastructure       Server Network
-    Network                │
-     │                     │
-     ▼                     ▼
-   DC01                 Ubuntu
- AD / DNS               Server
-     │
-     ├──────────────┐
-     ▼              ▼
-Windows Clients    Veeam
-                   Server
-```                   
+        |
+        v
+    +-----------+
+    |  pfSense  |
+    | Firewall  |
+    |  / Router |
+    +-----+-----+
+          |
+     +----+-------------+
+     |                  |
+     v                  v
+Infrastructure      Server Network
+    Network               |
+     |                    |
+     v                    v
+   +-----+             +-------+
+   | DC01|             |Ubuntu |
+   |AD/DNS             |Server |
+   +--+--+             +-------+
+      |
+      +----------+-----------+
+      |                      |
+      v                      v
+Windows Clients          Veeam Server
+
 The network architecture is intentionally segmented to provide practical experience with:
 
 - Routing between isolated networks
@@ -94,12 +96,12 @@ The lab integrates on-premises Active Directory with Microsoft Entra ID using Mi
 ### Authentication Flow
 
     On-Premises Active Directory
-                │
-                │ Microsoft Entra Connect
-                ▼
+                |
+                | Microsoft Entra Connect
+                v
          Microsoft Entra ID
-                │
-                ▼
+                |
+                v
          Cloud Applications
 
 The environment is used to explore the distinction between **on-premises identity infrastructure and cloud authentication**, including how synchronized identities behave when on-premises infrastructure is unavailable.
