@@ -97,7 +97,8 @@ The lab integrates on-premises Active Directory with Microsoft Entra ID using Mi
 
     On-Premises Active Directory
                 |
-                | Microsoft Entra Connect
+       Microsoft Entra Connect
+                | 
                 v
          Microsoft Entra ID
                 |
