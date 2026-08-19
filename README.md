@@ -25,28 +25,26 @@ Rather than operating as a collection of isolated virtual machines, the lab is d
 The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
 ```text
-                         Internet
-                            │
-                            ▼
-                       ┌─────────┐
-                       │ pfSense │
-                       │ Firewall│
-                       └────┬────┘
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-        Infrastructure                Server Network
-           Network                        │
-              │                           │
-          ┌───┴───┐                  ┌────┴─────┐
-          │ DC01  │                  │  Ubuntu  │
-          │ AD/DNS│                  │  Server  │
-          └───┬───┘                  └──────────┘
-              │
-        ┌─────┴─────┐
-        │           │
-     Windows      Veeam Server
-     Clients
+                              Internet
+                                  │
+                                  ▼
+                           ┌─────────────┐
+                           │   pfSense   │
+                           │ Firewall /  │
+                           │    Router   │
+                           └──────┬──────┘
+                                  │
+             ┌────────────────────┼────────────────────┐
+             │                    │                    │
+             ▼                    ▼                    ▼
+       Infrastructure        Client Network       Isolated Network
+          Network                  │                    │
+             │                     │                    │
+       ┌─────┼─────┐               │               ┌────┴─────┐
+       │     │     │               │               │  Ubuntu  │
+       ▼     ▼     ▼               ▼               │  Server  │
+      DC01  Veeam  ...       Windows Clients       └──────────┘
+     AD/DNS Server
 ```
 
 
