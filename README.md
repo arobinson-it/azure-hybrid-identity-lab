@@ -1,155 +1,112 @@
 # Infrastructure HomeLab
 
-A virtualized home lab built to develop and demonstrate practical skills across **Windows infrastructure, identity, networking, backup, Linux administration, and cloud integration**.
+A virtualized enterprise-style home lab built to develop and demonstrate practical skills across **Windows infrastructure, identity, networking, virtualization, backup and recovery, Linux administration, automation, and cloud integration**.
 
-The lab started as a Microsoft Entra hybrid identity project and has evolved into a broader infrastructure environment for testing enterprise technologies, troubleshooting real-world infrastructure scenarios, and building hands-on administration experience.
+The lab originally began as a Microsoft Entra hybrid identity project and has evolved into an interconnected infrastructure environment for testing enterprise technologies, troubleshooting realistic infrastructure scenarios, and building hands-on administration experience.
 
-## Technologies
+Rather than operating as a collection of isolated virtual machines, the lab is designed around **dependencies between infrastructure services**. Changes to networking, DNS, Active Directory, authentication, or firewall policy can have realistic effects across the environment.
 
-<details>
-<summary>Virtualization</summary>
+## Environment Overview
 
-- VMware Workstation Pro
-- Multiple Windows Server and Linux virtual machines
-- Isolated virtual networks for infrastructure and client systems
+| Area | Technologies |
+|---|---|
+| Virtualization | VMware Workstation Pro |
+| Windows Infrastructure | Windows Server 2025, Active Directory, DNS, DHCP |
+| Identity | Microsoft Entra ID, Entra Connect, Password Hash Synchronization |
+| Networking | pfSense, VMware virtual networks, NAT, routing, segmentation |
+| Security | MFA, Conditional Access, privileged identities, legacy authentication controls |
+| Backup | Veeam Backup & Replication |
+| Linux | Ubuntu Server, Netplan, DNS and network administration |
+| Automation | PowerShell |
+| CI/CD | Azure DevOps, Azure Repos, Azure Pipelines |
 
-</details>
+## Lab Architecture
 
-<details>
-<summary>Identity & Windows Infrastructure</summary>
+The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
-- Windows Server 2025
-- Active Directory Domain Services (AD DS)
-- Active Directory DNS
-- Organizational Units and user management
-- Domain-joined Windows clients
-- Microsoft Entra ID
-- Microsoft Entra Connect
-- Password Hash Synchronization (PHS)
+    Internet
+        │
+        ▼
+    ┌─────────────┐
+    │   pfSense   │
+    │ Firewall /  │
+    │    Router   │
+    └──────┬──────┘
+           │
+     ┌─────┴──────────────┐
+     │                    │
+     ▼                    ▼
+Infrastructure       Server Network
+    Network                │
+     │                     │
+     ▼                     ▼
+   DC01                 Ubuntu
+ AD / DNS               Server
+     │
+     ├──────────────┐
+     ▼              ▼
+Windows Clients    Veeam
+                   Server
 
-</details>
+The network architecture is intentionally segmented to provide practical experience with:
 
-<details>
-<summary>Networking & Security</summary>
-
-- pfSense
-- Firewall and NAT
+- Routing between isolated networks
+- Firewall policies
 - DHCP
 - DNS
-- Network segmentation
-- Isolated VMware virtual networks
-- Internet access policies and internal network aliases
+- NAT
+- Internet access control
+- Infrastructure dependencies
+- Windows and Linux connectivity troubleshooting
 
-</details>
+## Windows Infrastructure & Active Directory
 
-<details>
-<summary>Automation & CI/CD</summary>
+The Windows infrastructure provides the foundation for the lab's identity and domain services.
 
-- Azure DevOps
-- Azure Repos
-- Azure Pipelines
-- PowerShell
+### Active Directory
 
-</details>
+- Windows Server 2025 domain controller
+- Active Directory Domain Services (AD DS)
+- Active Directory-integrated DNS
+- Organizational Units
+- User and group administration
+- Domain authentication
+- Domain-joined Windows clients
+- DHCP authorization
+- Windows infrastructure administration
 
-<details>
-<summary>Backup & Recovery</summary>
-
-- Veeam Backup & Replication
-- Dedicated Veeam server
-- Backup testing and recovery scenarios
-
-</details>
-
-<details>
-<summary>Linux</summary>
-
-- Ubuntu Server
-- Linux networking and Netplan
-- DNS troubleshooting
-- Linux server administration
-
-</details>
-
-## Current Lab Architecture
-
-The environment currently consists of several virtualized infrastructure systems connected through VMware virtual networks.
-
-```text
-                         Internet
-                            │
-                            ▼
-                       ┌─────────┐
-                       │ pfSense │
-                       │ Firewall│
-                       └────┬────┘
-                            │
-              ┌─────────────┴─────────────┐
-              │                           │
-        Infrastructure                Server Network
-           Network                        │
-              │                           │
-          ┌───┴───┐                  ┌────┴─────┐
-          │ DC01  │                  │  Ubuntu  │
-          │ AD/DNS│                  │  Server  │
-          └───┬───┘                  └──────────┘
-              │
-        ┌─────┴─────┐
-        │           │
-     Windows      Veeam Server
-     Clients
-```
-
-## Active Directory
-
-<details>
-<summary>Active Directory Configuration</summary>
-
-- Deployed Windows Server 2025 as the domain controller
-- Configured Active Directory Domain Services
-- Configured internal DNS
-- Created users and organizational units
-- Configured domain authentication
-- Joined Windows clients to the domain
-- Configured DHCP authorization and domain administration
-
-</details>
+The environment is designed to reproduce common enterprise dependencies between **Active Directory, DNS, DHCP, networking, and client authentication**.
 
 ## Microsoft Entra Hybrid Identity
 
-The lab integrates on-premises Active Directory with Microsoft Entra ID.
+The lab integrates on-premises Active Directory with Microsoft Entra ID using Microsoft Entra Connect.
 
-<details>
-<summary>Hybrid Identity Configuration</summary>
+### Configuration
 
-- Created Microsoft Entra ID tenant
-- Installed and configured Microsoft Entra Connect
-- Enabled Password Hash Synchronization
-- Synchronized on-premises identities to Entra ID
-- Verified synchronization and account visibility
-- Tested cloud authentication independently of on-premises availability
+- Microsoft Entra ID tenant
+- Microsoft Entra Connect
+- Password Hash Synchronization (PHS)
+- On-premises identity synchronization
+- Synchronized user accounts
+- Cloud authentication
+- Authentication testing during infrastructure outages
 
 ### Authentication Flow
 
-    On-Prem AD
-        │
-        │ Microsoft Entra Connect
-        ▼
-    Microsoft Entra ID
-        │
-        ▼
-    Cloud Applications
+    On-Premises Active Directory
+                │
+                │ Microsoft Entra Connect
+                ▼
+         Microsoft Entra ID
+                │
+                ▼
+         Cloud Applications
 
-The lab demonstrates the distinction between **on-premises authentication** and **cloud authentication**, including the behavior of synchronized identities when the domain controller is unavailable.
-
-</details>
+The environment is used to explore the distinction between **on-premises identity infrastructure and cloud authentication**, including how synchronized identities behave when on-premises infrastructure is unavailable.
 
 ## Microsoft Entra Security
 
-<details>
-<summary>Identity Security</summary>
-
-Identity security has also been incorporated into the lab environment.
+Identity security has been incorporated into the environment to provide practical experience with modern authentication and access-control concepts.
 
 - Multi-Factor Authentication
 - Separate standard and administrative identities
@@ -159,14 +116,13 @@ Identity security has also been incorporated into the lab environment.
 - Sign-in log investigation
 - Authentication testing during infrastructure outages
 
-</details>
+These configurations provide hands-on experience with both **identity administration and identity security** rather than treating Entra ID purely as a synchronization target.
 
-## pfSense Networking
-
-<details>
-<summary>Firewall & Routing</summary>
+## Networking & pfSense
 
 pfSense provides the primary routing and firewall layer for the lab.
+
+### pfSense
 
 Current interfaces include:
 
@@ -174,9 +130,7 @@ Current interfaces include:
 - LAN
 - OPT1
 
-VMware virtual networks are used to isolate different portions of the environment.
-
-The firewall configuration is being used to practice:
+The firewall is used to practice:
 
 - Inter-network routing
 - DHCP
@@ -185,81 +139,73 @@ The firewall configuration is being used to practice:
 - Firewall rules
 - Network aliases
 - Internet access control
-- Segmentation between infrastructure and client/server networks
+- Network segmentation
 
-</details>
+### VMware Networking
 
-## VMware Networking
+VMware Workstation Pro provides the underlying virtual network infrastructure.
 
-<details>
-<summary>Virtual Network Configuration</summary>
+Current networks include:
 
-The lab uses VMware Workstation Pro virtual networks to create isolated network segments.
+- **VMnet1** — Host-only
+- **VMnet2** — Infrastructure network
+- **VMnet3** — Additional isolated network
+- **VMnet8** — NAT / Internet connectivity
 
-Current virtual networking includes:
+This provides a controlled environment for testing connectivity and the interaction between **virtual networking, routing, firewall policy, DNS, and DHCP**.
 
-- VMnet1 — Host-only
-- VMnet2 — Infrastructure network
-- VMnet3 — Additional isolated network
-- VMnet8 — NAT / Internet connectivity
+## Backup & Recovery
 
-This provides a controlled environment for testing routing, firewall policies, DHCP, DNS, and connectivity between isolated systems.
+A dedicated Veeam server is used to develop practical backup and recovery experience.
 
-</details>
+### Veeam
 
-## Veeam
-
-<details>
-<summary>Backup & Recovery</summary>
-
-A dedicated Veeam server is used to develop practical backup and recovery skills.
-
-Current objectives include:
+Current work includes:
 
 - Virtual machine backups
 - Backup configuration
 - Backup verification
 - Recovery testing
 - Understanding backup infrastructure dependencies
+- Testing recovery scenarios
 
-</details>
+The goal is to treat backup as part of the infrastructure rather than simply configuring a backup job and assuming recovery will work.
 
-## Ubuntu Server
+## Linux Administration
 
-<details>
-<summary>Linux Administration</summary>
-
-Ubuntu Server is included as a Linux component of the lab.
+Ubuntu Server provides a Linux component within the otherwise Microsoft-focused infrastructure environment.
 
 Current work includes:
 
-- Server deployment
-- Static/DHCP networking
+- Ubuntu Server deployment
+- Static and DHCP networking
 - Netplan configuration
 - DNS troubleshooting
 - Connectivity troubleshooting
-- Integration with the lab's segmented network architecture
-
-</details>
+- Linux server administration
+- Integration with segmented lab networks
 
 ## Automation & CI/CD
 
-<details>
-<summary>Azure DevOps</summary>
+Automation is being incorporated into the lab using PowerShell and Azure DevOps.
+
+### Azure DevOps
 
 Current work includes:
 
-- Developing CI/CD Pipelines
-- Understanding YAML syntax 
+- Azure Repos
+- YAML-based Azure Pipelines
+- CI/CD pipeline design
+- Multi-stage pipelines
+- Pipeline approvals and checks
+- PowerShell automation
+- Repository-based infrastructure tooling
 
-</details>
+The goal is to move beyond manually administering the environment and begin applying **source control, automation, and repeatable deployment practices**.
 
 ## Skills Being Practiced
 
-<details>
-<summary>Technical Skills</summary>
-
-This lab is primarily used to build practical administration and troubleshooting experience in:
+The lab is used to build practical administration, automation, and troubleshooting experience across:
 
 - Active Directory administration
 - Microsoft Entra ID
@@ -274,66 +220,65 @@ This lab is primarily used to build practical administration and troubleshooting
 - Virtualization
 - Backup and recovery
 - PowerShell
-- Infrastructure troubleshooting
+- Azure DevOps
+- CI/CD
 - Authentication and access control
+- Infrastructure troubleshooting
 
-</details>
+## Real-World Scenarios
 
-## What This Lab Demonstrates
+The lab is intentionally built to support realistic troubleshooting scenarios rather than simply demonstrating successful configurations.
 
-<details>
-<summary>Real-World Infrastructure Scenarios</summary>
+### Identity & Authentication
 
-Rather than being a collection of disconnected VMs, the goal is to maintain an interconnected environment where changes to one component can have realistic effects on the others.
+- Testing authentication when Active Directory infrastructure is unavailable
+- Investigating synchronized identities in Microsoft Entra ID
+- Testing Conditional Access and MFA policies
+- Investigating authentication and sign-in failures
 
-Examples include:
+### Networking
 
-- Testing authentication when AD infrastructure is unavailable
-- Troubleshooting DNS across multiple network segments
+- Troubleshooting DNS across network segments
+- Testing routing between isolated networks
 - Controlling server Internet access through pfSense
-- Testing DHCP and routing between isolated networks
+- Testing DHCP and NAT behavior
+- Investigating connectivity failures between infrastructure components
+
+### Infrastructure
+
 - Backing up and recovering infrastructure VMs
 - Troubleshooting Windows and Linux connectivity
-- Testing identity and authentication policies in Entra ID
-- Investigating how infrastructure dependencies affect availability
+- Testing infrastructure dependencies
+- Investigating how failures in one service affect dependent systems
 
-</details>
+The underlying goal is to practice **finding the actual failing layer rather than troubleshooting only the visible symptom**.
 
 ## Future Development
-
-<details>
-<summary>Planned Additions</summary>
 
 Planned additions and improvements include:
 
 - Microsoft Intune / endpoint management
 - Azure administration and resource management
-- PowerShell automation
+- Expanded PowerShell automation
 - Ansible
 - Terraform
 - Kubernetes
 - Expanded network segmentation
-- Additional monitoring and logging
+- Monitoring and centralized logging
 - More comprehensive backup and disaster-recovery testing
-
-</details>
 
 ## Lessons Learned
 
-<details>
-<summary>Key Takeaways</summary>
+Building and maintaining the environment has provided practical experience with the dependencies that exist between infrastructure services.
 
-Building the environment has provided practical experience with the dependencies that exist between infrastructure services.
+Some of the most important lessons so far:
 
-In particular:
-
-- DNS is foundational to both Windows and network infrastructure.
-- Hybrid identity requires understanding both on-premises and cloud authentication.
-- Network segmentation introduces additional routing and firewall dependencies.
-- Backup infrastructure is itself dependent on the underlying network and virtualization environment.
-- Troubleshooting is often about identifying which layer is actually failing rather than assuming the visible symptom is the root cause.
-
-</details>
+- **DNS is foundational** to both Windows and network infrastructure.
+- **Hybrid identity requires understanding both on-premises and cloud authentication.**
+- **Network segmentation introduces additional routing and firewall dependencies.**
+- **Backup infrastructure is itself dependent on the underlying network and virtualization environment.**
+- **Infrastructure problems are often dependency problems.**
+- **Effective troubleshooting starts by identifying which layer is actually failing rather than assuming the visible symptom is the root cause.**
 
 ## Author
 
