@@ -25,7 +25,7 @@ Rather than operating as a collection of isolated virtual machines, the lab is d
 The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
 ```text
-                                                            Internet
+                               Internet
                                   │
                                   ▼
                            ┌─────────────┐
