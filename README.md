@@ -47,7 +47,7 @@ Infrastructure       Server Network
      ▼              ▼
 Windows Clients    Veeam
                    Server
-
+```                   
 The network architecture is intentionally segmented to provide practical experience with:
 
 - Routing between isolated networks
