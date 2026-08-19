@@ -250,10 +250,10 @@ Current work includes:
 Current work includes:
 
 - Developing CI/CD Pipelines
-- Understanding YAML syntax
-- 
+- Understanding YAML syntax 
 
 </details>
+
 ## Skills Being Practiced
 
 <details>
