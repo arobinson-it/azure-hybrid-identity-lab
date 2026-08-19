@@ -43,6 +43,14 @@ The lab started as a Microsoft Entra hybrid identity project and has evolved int
 </details>
 
 <details>
+<summary>Automation & CI/CD</summary>
+-Azure DevOps
+-Azure Repos
+-Azure Pipelines
+-PowerShell
+</details>
+
+<details>
 <summary>Backup & Recovery</summary>
 
 - Veeam Backup & Replication
