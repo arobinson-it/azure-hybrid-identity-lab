@@ -44,10 +44,12 @@ The lab started as a Microsoft Entra hybrid identity project and has evolved int
 
 <details>
 <summary>Automation & CI/CD</summary>
+
 - Azure DevOps
 - Azure Repos
 - Azure Pipelines
 - PowerShell
+
 </details>
 
 <details>
