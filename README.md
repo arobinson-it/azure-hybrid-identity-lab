@@ -24,31 +24,31 @@ Rather than operating as a collection of isolated virtual machines, the lab is d
 
 The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
-    Internet
-        |
-        v
-    +-----------+
-    |  pfSense  |
-    | Firewall  |
-    |  / Router |
-    +-----+-----+
-          |
-     +----+-------------+
-     |                  |
-     v                  v
-Infrastructure      Server Network
-    Network               |
-     |                    |
-     v                    v
-   +-----+             +-------+
-   | DC01|             |Ubuntu |
-   |AD/DNS             |Server |
-   +--+--+             +-------+
-      |
-      +----------+-----------+
-      |                      |
-      v                      v
-Windows Clients          Veeam Server
+```text
+                         Internet
+                            │
+                            ▼
+                       ┌─────────┐
+                       │ pfSense │
+                       │ Firewall│
+                       └────┬────┘
+                            │
+              ┌─────────────┴─────────────┐
+              │                           │
+        Infrastructure                Server Network
+           Network                        │
+              │                           │
+          ┌───┴───┐                  ┌────┴─────┐
+          │ DC01  │                  │  Ubuntu  │
+          │ AD/DNS│                  │  Server  │
+          └───┬───┘                  └──────────┘
+              │
+        ┌─────┴─────┐
+        │           │
+     Windows      Veeam Server
+     Clients
+```
+
 
 The network architecture is intentionally segmented to provide practical experience with:
 
