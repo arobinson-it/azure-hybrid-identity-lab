@@ -242,6 +242,18 @@ Current work includes:
 
 </details>
 
+## Automation & CI/CD
+
+<details>
+<summary>Azure DevOps</summary>
+
+Current work includes:
+
+- Developing CI/CD Pipelines
+- Understanding YAML syntax
+- 
+
+</details>
 ## Skills Being Practiced
 
 <details>
