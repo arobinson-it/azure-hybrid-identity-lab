@@ -25,7 +25,7 @@ Rather than operating as a collection of isolated virtual machines, the lab is d
 The environment consists of multiple virtualized infrastructure and client systems connected through isolated VMware virtual networks and routed through pfSense.
 
 ```text
-                              Internet
+                                                            Internet
                                   │
                                   ▼
                            ┌─────────────┐
@@ -34,17 +34,16 @@ The environment consists of multiple virtualized infrastructure and client syste
                            │    Router   │
                            └──────┬──────┘
                                   │
-             ┌────────────────────┼────────────────────┐
-             │                    │                    │
-             ▼                    ▼                    ▼
-       Infrastructure        Client Network       Isolated Network
-          Network                  │                    │
-             │                     │                    │
-       ┌─────┼─────┐               │               ┌────┴─────┐
-       │     │     │               │               │  Ubuntu  │
-       ▼     ▼     ▼               ▼               │  Server  │
-      DC01  Veeam  ...       Windows Clients       └──────────┘
-     AD/DNS Server
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+             Windows Infrastructure       Linux Infrastructure
+                    │                           │
+              ┌─────┼─────┐                     │
+              │     │     │                     │
+              ▼     ▼     ▼                     ▼
+             DC01  Veeam  Clients             Ubuntu
+            AD/DNS Server
 ```
 
 
