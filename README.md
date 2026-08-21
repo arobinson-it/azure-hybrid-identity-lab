@@ -30,8 +30,7 @@ The environment consists of multiple virtualized infrastructure and client syste
                                   ▼
                            ┌─────────────┐
                            │   pfSense   │
-                           │ Firewall /  │
-                           │    Router   │
+                           │   Firewall  │
                            └──────┬──────┘
                                   │
                     ┌─────────────┴─────────────┐
