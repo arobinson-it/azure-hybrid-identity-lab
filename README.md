@@ -304,7 +304,7 @@ Building and maintaining the environment has provided practical experience with 
 
 Some of the most important lessons so far:
 
-- **DNS is foundational** to both Windows and network infrastructure.
+- **DNS is foundational to both Windows and network infrastructure.**
 - **Hybrid identity requires understanding both on-premises and cloud authentication.**
 - **Network segmentation introduces additional routing and firewall dependencies.**
 - **Backup infrastructure is itself dependent on the underlying network and virtualization environment.**
